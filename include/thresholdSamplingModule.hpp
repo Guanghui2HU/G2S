@@ -41,9 +41,7 @@ public:
 			unsigned numberElement=0;
 			for (int i = 0; i < _cdmV[moduleID].size(); ++i)
 			{
-				
 				numberElement+=_cdmV[moduleID][i]->getErrorsArraySize();
-				
 			}
 			_maxNumberOfElement[moduleID]=numberElement;
 		}
@@ -60,7 +58,6 @@ public:
 		//if(_convertionTypeVector[0].size()!=neighborValueArrayVector[0].size()) //to redo
 		//	fprintf(stderr, "%s %d vs %d\n", "failure",_convertionTypeVector[0].size(),neighborValueArrayVector[0].size());
 
-		unsigned sizeDimsKernel=_kernel->dataSize()/_kernel->_nbVariable;
 		unsigned indexCenter=0;
 		for (int i =  _kernel->_dims.size()-1; i>=0 ; i--)
 		{

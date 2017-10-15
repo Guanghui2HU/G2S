@@ -191,6 +191,7 @@ int main(int argc, char const *argv[]) {
 	float nbCandidate=std::nanf("0");		// 1/f for QS
 	float narrowness=std::nanf("0");		// narrowness for NDS
 	unsigned seed=std::chrono::high_resolution_clock::now().time_since_epoch().count();
+	float fastSimulation=0.f;
 	g2s::DistanceType searchDistance=g2s::EUCLIDIEN;
 
 	if (arg.count("-th") == 1)
@@ -234,6 +235,11 @@ int main(int argc, char const *argv[]) {
 		seed=atoi((arg.find("-s")->second).c_str());
 	}
 	arg.erase("-s");
+	if (arg.count("-fs") == 1)
+	{
+		fastSimulation=atof((arg.find("-fs")->second).c_str());
+	}
+	arg.erase("-fs");
 
 	if (arg.count("-wd") == 1)
 	{
@@ -716,8 +722,8 @@ int main(int argc, char const *argv[]) {
 
 	auto begin = std::chrono::high_resolution_clock::now();
 
-	simulation(reportFile, DI, TIs, QSM, pathPosition, simulationPathIndex+beginPath, simulationPath.dataSize()-beginPath,
-	 seedForIndex, importDataIndex, nbNeighbors, nbThreads);
+	simulation(reportFile, DI, TIs, kernel, QSM, pathPosition, simulationPathIndex+beginPath, simulationPath.dataSize()-beginPath,
+	 seedForIndex, importDataIndex, nbNeighbors, nbThreads, fastSimulation);
 	auto end = std::chrono::high_resolution_clock::now();
 	double time = 1.0e-6 * std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin).count();
 	fprintf(reportFile,"compuattion time: %7.2f s\n", time/1000);

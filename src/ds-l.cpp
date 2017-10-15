@@ -715,7 +715,7 @@ int main(int argc, char const *argv[]) {
 
 	auto begin = std::chrono::high_resolution_clock::now();
 
-	simulation(reportFile, DI, TIs, TSM, pathPosition, simulationPathIndex+beginPath, simulationPath.dataSize()-beginPath,
+	simulation(reportFile, DI, TIs, kernel, TSM, pathPosition, simulationPathIndex+beginPath, simulationPath.dataSize()-beginPath,
 	 seedForIndex, importDataIndex, nbNeighbors, nbThreads);
 	auto end = std::chrono::high_resolution_clock::now();
 	double time = 1.0e-6 * std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin).count();
