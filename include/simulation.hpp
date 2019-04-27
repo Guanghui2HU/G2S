@@ -138,11 +138,7 @@ void simulation(FILE *logFile,g2s::DataImage &di, std::vector<g2s::DataImage> &T
 				if(di._types[i]==g2s::DataImage::Categorical){
 					for (int k = 0; k < categoriesValues[idCategorie].size(); ++k)
 					{
-						if(neighborValueArrayVector[j][i]==categoriesValues[idCategorie][k]){
-							data[id]=1;
-						}else{
-							data[id]=0;
-						}
+						data[id] = (neighborValueArrayVector[j][i] == categoriesValues[idCategorie][k]);
 						id++;
 					}
 					idCategorie++;
@@ -343,7 +339,7 @@ void simulationFull(FILE *logFile,g2s::DataImage &di, std::vector<g2s::DataImage
 						unsigned cpt=0;
 						for (int i = 0; i < di._nbVariable; ++i)
 						{
-							if((numberOfNeighborsProVariable[i]<numberNeighbor[i%numberNeighbor.size()]))
+							if((numberOfNeighborsProVariable[i]<numberNeighbor[i%numberNeighbor.size()])&&(posterioryPath[dataIndex*di._nbVariable+i]<indexPath))
 							{
 								#pragma omp atomic read
 								val=di._data[dataIndex*di._nbVariable+i];
@@ -378,11 +374,7 @@ void simulationFull(FILE *logFile,g2s::DataImage &di, std::vector<g2s::DataImage
 				if(di._types[i]==g2s::DataImage::Categorical){
 					for (int k = 0; k < categoriesValues[idCategorie].size(); ++k)
 					{
-						if(neighborValueArrayVector[j][i]==categoriesValues[idCategorie][k]){
-							data[id]=1;
-						}else{
-							data[id]=0;
-						}
+						data[id] = (neighborValueArrayVector[j][i] == categoriesValues[idCategorie][k]);
 						id++;
 					}
 					idCategorie++;
